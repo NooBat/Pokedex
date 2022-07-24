@@ -5,11 +5,11 @@ import PokemonCard from './components/PokemonCard';
 
 const App = () => {
   const [pokedex, setPokedex] = useState([]);
-  // const [searchHistory, setSearchHistory] = useState([]);
+  const [searchHistory, setSearchHistory] = useState([]);
 
   useEffect(() => {
     axios
-      .get('https://pokeapi.co/api/v2/pokemon/?limit=100')
+      .get('https://pokeapi.co/api/v2/pokemon/?limit=10000')
       .then((response) => {
         const pokemons = response.data.results.filter(
           (pokemon) => pokemon.name.indexOf('-') === -1
@@ -33,21 +33,14 @@ const App = () => {
 
   const handleSearch = (event) => {
     if (event.target.value.length === 0) {
-      setPokedex(pokedex.map((pokemon) => {
-        const newPokemon = {
-          ...pokemon,
-          show: true,
-        };
-
-        return newPokemon;
-      }));
+      setPokedex(searchHistory);
     } else {
       const searchEntry = event.target.value;
   
       setPokedex(pokedex.map((pokemon) => {
         const newPokemon = {
           ...pokemon,
-          owned: true || pokemon.name.indexOf(searchEntry.toLowerCase()) !== -1,
+          show: pokemon.name.slice(0, pokemon.name.length - 1).indexOf(searchEntry.toLowerCase()) !== -1,
         };
   
         return newPokemon;
