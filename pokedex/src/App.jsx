@@ -2,10 +2,10 @@ import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 
 import PokemonCard from './components/PokemonCard';
+import SearchBar from './components/SearchBar';
 
 const App = () => {
   const [pokedex, setPokedex] = useState([]);
-  const [searchHistory, setSearchHistory] = useState([]);
 
   useEffect(() => {
     axios
@@ -31,29 +31,12 @@ const App = () => {
       });
   }, []);
 
-  const handleSearch = (event) => {
-    if (event.target.value.length === 0) {
-      setPokedex(searchHistory);
-    } else {
-      const searchEntry = event.target.value;
-  
-      setPokedex(pokedex.map((pokemon) => {
-        const newPokemon = {
-          ...pokemon,
-          show: pokemon.name.slice(0, pokemon.name.length - 1).indexOf(searchEntry.toLowerCase()) !== -1,
-        };
-  
-        return newPokemon;
-      }));
-    }
-  };
-
   const pokedexToShow = pokedex.filter((pokemon) => pokemon.owned === true);
 
   return (
     <div>    
-      <input type='text' onChange={handleSearch}/>
-      <h1>Pokemon Owned</h1>
+      <SearchBar pokedex={pokedex} />
+      <h1 className="text-center">Pokemon Owned</h1>
       {pokedexToShow.map((pokemon) => (
         <div key={pokemon.id}>
           <PokemonCard card={pokemon} />
