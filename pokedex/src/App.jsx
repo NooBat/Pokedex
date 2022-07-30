@@ -1,11 +1,17 @@
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
+import { Route, Routes, useMatch } from 'react-router-dom';
 
-import PokemonCard from './components/PokemonCard';
-import SearchBar from './components/SearchBar';
+import LoadingPage from './pages/LoadingPage';
+import NavigationBar from './components/NavigationBar';
+import PokemonList from './pages/PokemonList';
+import PokemonPage from './pages/PokemonPage';
 
 const App = () => {
   const [pokedex, setPokedex] = useState([]);
+
+  const match = useMatch('/pokemons/:id');
+
 
   useEffect(() => {
     axios
@@ -18,11 +24,11 @@ const App = () => {
         setPokedex(
           pokemons.map((pokemon, index) => {
             const card = {
-              id: index,
+              id: index + 1,
               name: pokemon.name,
               url: pokemon.url,
               form: `https://img.pokemondb.net/artwork/${pokemon.name}.jpg`,
-              owned: false,
+              owned: true,
             };
 
             return card;
@@ -31,17 +37,39 @@ const App = () => {
       });
   }, []);
 
-  const pokedexToShow = pokedex.filter((pokemon) => pokemon.owned === true);
+  const handleClickOwned = (id) => {
+    setPokedex(
+      pokedex.map((pokemon) =>
+        pokemon.id === id ? { ...pokemon, owned: true } : pokemon
+      )
+    );
+  };
+
+  const pokemonToShow = pokedex.filter((pokemon) => pokemon.owned === true);
+  const chosenPokemon = match && pokedex.length
+    ? pokedex.find((pokemon) => pokemon.id === Number(match.params.id))
+    : null;
 
   return (
-    <div>    
-      <SearchBar pokedex={pokedex} />
-      <h1 className="text-center">Pokemon Owned</h1>
-      {pokedexToShow.map((pokemon) => (
-        <div key={pokemon.id}>
-          <PokemonCard card={pokemon} />
-        </div>
-      ))}
+    <div className='h-screen w-screen'>
+      <NavigationBar pokedex={pokedex} />
+      <Routes>
+        <Route
+          path='/'
+          element={<PokemonList pokemonToShow={pokemonToShow} />}
+        />
+        <Route
+          path='/pokemons/:id'
+          element={
+            chosenPokemon
+            ? <PokemonPage
+                pokemon={chosenPokemon}
+                handleClickOwned={handleClickOwned}
+              />
+            : <LoadingPage />
+          }
+        />
+      </Routes>
     </div>
   );
 };

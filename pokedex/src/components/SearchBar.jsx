@@ -1,8 +1,9 @@
 import { React, useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const SearchBar = ({ pokedex }) => {
   const [searchHistory, setSearchHistory] = useState([]);
-  const [optionsList, setOptionsList] = useState([]);
+  // const [optionsList, setOptionsList] = useState([]);
   const [searchEntry, setSearchEntry] = useState('');
   const ulRef = useRef();
   const inputRef = useRef();
@@ -19,24 +20,6 @@ const SearchBar = ({ pokedex }) => {
 
   const handleSearch = (event) => {
     setSearchEntry(event.target.value);
-
-    console.log(searchEntry);
-    console.log(event.target.value);
-
-    if (searchEntry.length === 0) {
-      setOptionsList(searchHistory);
-    } else {
-      const searchEntry1 = event.target.value;
-
-      setOptionsList(
-        pokedex.filter(
-          (pokemon) =>
-            pokemon.name
-              .slice(0, searchEntry1.length)
-              .indexOf(searchEntry1.toLowerCase()) !== -1
-        )
-      );
-    }
   };
 
   const handleClick = (clickedPokemon) => {
@@ -62,46 +45,52 @@ const SearchBar = ({ pokedex }) => {
   };
 
   return (
-    <div className='flex justify-center'>
+    <div className='h-full bg-inherit w-2/5'>
       <input
         type='text'
         ref={inputRef}
+        placeholder='Search'
         onChange={handleSearch}
-        className='w-2/5 flex rounded-full overflow-hidden focus:rounded-b-none focus:rounded-t-[10px] relative bg-white border-double border-4 border-yellow-500 px-4'
+        onFocus={(e) => {
+          e.target.select();
+        }}
+        className='box-border block w-full h-full focus:rounded-none border-solid border-orange-500 border-2 rounded-full overflow-hidden bg-white px-5'
       />
       <ul
         ref={ulRef}
-        className='w-2/5 absolute top-[31px] block mx-auto border-solid border-x-2 border-black max-h-[400px] overflow-hidden overflow-y-scroll'
+        className='block w-full mx-auto max-h-[400px] overflow-hidden overflow-y-scroll rounded-b-[10px]'
       >
-        {optionsList.map((option, index) => {
-          const newOption = {
-            ...option,
-            id: index,
-          };
-
-          return (
-            <li
-              key={newOption.id}
-              className='m-0 bg-white h-20 border-solid border-b-2 border-black shadow hover:shadow-lg'
-            >
+        {(searchEntry.length
+          ? pokedex.filter(
+              (pokemon) =>
+                pokemon.name
+                  .slice(0, searchEntry.length)
+                  .indexOf(searchEntry.toLowerCase()) !== -1
+            )
+          : searchHistory
+        ).map((pokemon) => (
+          <li
+            key={pokemon.id}
+            className='m-0 bg-white h-20 hover:bg-slate-200 py-[2px]'
+          >
+            <Link to={`/pokemons/${pokemon.id}`} className="bg-inherit">
               <button
                 type='button'
-                className='mx-auto w-full flex flex-row content-center'
-                onClick={() => handleClick(option)}
+                className='mx-auto w-full flex flex-row content-center bg-inherit'
+                onClick={() => handleClick(pokemon)}
               >
                 <img
-                  className='w-20 h-[78px] border-solid border-r-2 border-black'
-                  src={newOption.form}
-                  alt={`${newOption.name}`}
+                  className='w-20 h-[76px]'
+                  src={pokemon.form}
+                  alt={`form of ${pokemon.name}`}
                 />
-                <h3 className='ml-5 my-auto bg-white'>
-                  {newOption.name.charAt(0).toUpperCase() +
-                    newOption.name.slice(1)}
+                <h3 className='ml-5 my-auto bg-inherit'>
+                  {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
                 </h3>
               </button>
-            </li>
-          );
-        })}
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   );
