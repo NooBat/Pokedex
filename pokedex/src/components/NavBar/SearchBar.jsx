@@ -5,17 +5,14 @@ const SearchBar = ({ pokedex }) => {
   const [searchHistory, setSearchHistory] = useState(JSON.parse(localStorage.getItem('search-history') || '[]'));
   const [searchEntry, setSearchEntry] = useState('');
   const [display, setDisplay] = useState('hidden');
-  const ulRef = useRef();
   const inputRef = useRef();
 
   useEffect(() => {
     inputRef.current.addEventListener('click', (event) => {
       event.stopPropagation();
-      ulRef.current.style.display = 'list-item';
       setDisplay('list-item')
     });
     document.addEventListener('click', () => {
-      ulRef.current.style.display = 'none';
       setDisplay('hidden');
     });
   }, []);
@@ -67,7 +64,6 @@ const SearchBar = ({ pokedex }) => {
         className='box-border block w-full h-full focus:rounded-b-none focus:rounded-t-xl border-2 border-red-500 border-solid rounded-full overflow-hidden bg-white px-5'
       />
       <ul
-        ref={ulRef}
         className={`w-full mx-auto max-h-[400px] overflow-hidden overflow-y-scroll rounded-b-[10px] ${display}`}
       >
         {(searchEntry.length
