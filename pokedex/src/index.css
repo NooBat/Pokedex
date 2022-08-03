@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400&family=Playfair+Display&display=swap');
+
+body {
   background-color: rgb(96 165 250);
+  font-family: 'Merriweather', 'sans-serif';
 }
