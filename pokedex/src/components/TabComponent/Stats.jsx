@@ -7,7 +7,7 @@ const Stats = ({ stats, tabKey }) => {
     <div
       className={
         tabKey === 1
-          ? 'h-[100%] overflow-y-scroll justify-center flex bg-white gap-x-[2%]'
+          ? 'h-[100%] overflow-y-scroll justify-center flex rounded-xl bg-blue-200 gap-x-[2%]'
           : 'hidden'
       }
     >
@@ -29,11 +29,11 @@ const Stats = ({ stats, tabKey }) => {
       <div className='flex flex-col my-auto content-center gap-y-[4px] w-[60%] h-fit'>
         {allStats.map((stat) => (
           <div
-            className='flex border-solid border-2 bg-gray-300 border-black h-[24px]'
+            className='flex border-solid border-2 bg-white border-black h-[24px]'
             key={`${stat}-line-${stats[stat]}`}
           >
             <div
-              className=' bg-green-600'
+              className=' bg-green-500 border-r-2 border-solid border-black'
               style={{ width: `${(stats[stat] / 255) * 100}%` }}
             />
           </div>

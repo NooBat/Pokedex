@@ -2,7 +2,9 @@ import { React, useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const SearchBar = ({ pokedex }) => {
-  const [searchHistory, setSearchHistory] = useState(JSON.parse(localStorage.getItem('search-history') || '[]'));
+  const [searchHistory, setSearchHistory] = useState(
+    JSON.parse(localStorage.getItem('search-history') || '[]')
+  );
   const [searchEntry, setSearchEntry] = useState('');
   const [display, setDisplay] = useState('hidden');
   const inputRef = useRef();
@@ -10,7 +12,7 @@ const SearchBar = ({ pokedex }) => {
   useEffect(() => {
     inputRef.current.addEventListener('click', (event) => {
       event.stopPropagation();
-      setDisplay('list-item')
+      setDisplay('list-item');
     });
     document.addEventListener('click', () => {
       setDisplay('hidden');
@@ -61,7 +63,9 @@ const SearchBar = ({ pokedex }) => {
           e.target.select();
         }}
         value={searchEntry}
-        className='box-border block w-full h-full focus:rounded-b-none focus:rounded-t-xl border-2 border-red-500 border-solid rounded-full overflow-hidden bg-white px-5'
+        className='box-border block w-full h-full border-[3px] border-yellow-400 border-solid 
+                  rounded-full overflow-hidden bg-slate-200 focus:rounded-b-none focus:rounded-t-xl 
+                  focus:bg-white hover:bg-slate-100 px-5 placeholder:text-slate-500'
       />
       <ul
         className={`w-full mx-auto max-h-[400px] overflow-hidden overflow-y-scroll rounded-b-[10px] ${display}`}
@@ -75,7 +79,10 @@ const SearchBar = ({ pokedex }) => {
             )
           : searchHistory
         ).map((pokemon) => (
-          <li key={pokemon.id} className='box-content bg-white h-20 hover:bg-slate-200'>
+          <li
+            key={pokemon.id}
+            className='box-content bg-white h-20 hover:bg-slate-200'
+          >
             <Link to={`/pokemons/${pokemon.id}`} className='bg-inherit'>
               <button
                 type='button'

@@ -9,6 +9,7 @@ import PokemonPage from './pages/PokemonPage';
 import NavBar from './components/NavBar';
 
 import ContextProvider from './contexts/Context';
+import Footer from './components/Footer';
 
 const App = () => {
   const [pokedex, setPokedex] = useState([]);
@@ -86,6 +87,7 @@ const App = () => {
             }
           />
         </Routes>
+        <Footer />
       </div>
     </ContextProvider>
   );

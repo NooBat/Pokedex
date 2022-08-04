@@ -47,14 +47,14 @@ const PokemonPage = ({ pokemon, owned, handleClickOwned }) => {
         <img
           src={pokemon.form}
           alt={`form of ${pokemon.name}`}
-          className='w-auto rounded-xl max-h-[200px]'
+          className='w-auto rounded-xl max-h-[200px] transition-all shadow-2xl hover:scale-[1.1] delay-75 ease-in-out'
         />
         <div className='flex flex-col place-content-center gap-y-[2vh]'>
           <div className='flex flex-row gap-x-[2vw]'>
             {fullPokemon.types.map((type) => (
               <p
                 key={fullPokemon.name + type}
-                className='text-[2vh] px-2 rounded-full border-[0.5vh] border-black border-solid'
+                className='text-[2vh] px-2 rounded-full border-[0.5vh] border-black border-solid shadow-xl transition-all hover:scale-[1.2] delay-75 ease-in-out'
                 style={{ backgroundColor: colorHash[type] }}
               >
                 {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -77,7 +77,7 @@ const PokemonPage = ({ pokemon, owned, handleClickOwned }) => {
             <button
               type='button'
               onClick={() => handleClickOwned(fullPokemon.id)}
-              className='border-solid border-2 transition-all hover:scale-125'
+              className='border-solid border-2 shadow-xl transition-all hover:scale-125 hover:rounded-lg'
               style={{
                 backgroundColor: owned ? 'green' : 'red',
                 borderColor: owned ? 'white' : 'black',
