@@ -53,7 +53,7 @@ const SearchBar = ({ pokedex }) => {
   localStorage.setItem('search-history', JSON.stringify(searchHistory));
 
   return (
-    <div className='h-full bg-inherit w-2/5'>
+    <div className='h-fit bg-inherit w-2/5 pt-[2.5vh] rounded-[10px]'>
       <input
         type='text'
         ref={inputRef}
@@ -63,8 +63,8 @@ const SearchBar = ({ pokedex }) => {
           e.target.select();
         }}
         value={searchEntry}
-        className='box-border block w-full h-full border-[3px] border-yellow-400 border-solid 
-                  rounded-full overflow-hidden bg-slate-200 focus:rounded-b-none focus:rounded-t-xl 
+        className='box-border block w-full h-[5vh] border-[3px] border-yellow-400 border-solid 
+                  rounded-lg overflow-hidden bg-slate-200 focus:rounded-b-none focus:rounded-t-xl 
                   focus:bg-white hover:bg-slate-100 px-5 placeholder:text-slate-500'
       />
       <ul
@@ -86,8 +86,11 @@ const SearchBar = ({ pokedex }) => {
             <Link to={`/pokemons/${pokemon.id}`} className='bg-inherit'>
               <button
                 type='button'
-                className='mx-auto w-full flex flex-row content-center bg-inherit'
-                onClick={() => handleClick(pokemon)}
+                className='mx-auto w-full flex content-center bg-inherit'
+                onClick={() => {
+                  document.documentElement.scrollTop = 0;
+                  handleClick(pokemon);
+                }}
               >
                 <img
                   className='w-20 h-[80px]'

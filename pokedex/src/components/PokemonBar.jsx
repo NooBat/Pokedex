@@ -21,6 +21,9 @@ const PokemonBar = ({ pokemon }) => {
       className='box-border flex gap-x-[1vw] bg-white hover:bg-gray-300 rounded-xl 
       border-solid border-black border-[0.5vh] mx-auto my-[1vh] w-[52vw] h-[15vh] min-w-[400px]
       min-h-[80px] ease-in-out hover:scale-[1.1] transform-gpu transition-all'
+      onClick={() => {
+        document.documentElement.scrollTop = 0;
+      }}
     >
       <img
         src={pokemon.form}
