@@ -13,7 +13,7 @@ const PokemonBar = ({ pokemon }) => {
       const info = response.data;
       setType(info.types.map((type) => type.type.name));
     });
-  }, []);
+  }, [pokemon.url]);
 
   return (
     <Link

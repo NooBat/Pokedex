@@ -24,7 +24,7 @@ const ContextProvider = ({ children }) => {
     water: '#1552e2',
   };
 
-  const value = useMemo(() => colorHash, []);
+  const value = useMemo(() => colorHash, [colorHash]);
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };
