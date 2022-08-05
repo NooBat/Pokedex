@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { React, createContext, useMemo } from 'react';
 
 export const Context = createContext();
@@ -22,7 +24,7 @@ const ContextProvider = ({ children }) => {
     rock: '#8b3e21',
     steel: '#42bd94',
     water: '#1552e2',
-  }));
+  }), []);
 
   const value = useMemo(() => colorHash, []);
 
