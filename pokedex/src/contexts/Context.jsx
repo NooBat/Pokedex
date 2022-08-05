@@ -3,7 +3,7 @@ import { React, createContext, useMemo } from 'react';
 export const Context = createContext();
 
 const ContextProvider = ({ children }) => {
-  const colorHash = {
+  const colorHash = useMemo(() => ({
     bug: '#3b9950',
     dark: '#5a5979',
     dragon: '#61cad9',
@@ -22,9 +22,9 @@ const ContextProvider = ({ children }) => {
     rock: '#8b3e21',
     steel: '#42bd94',
     water: '#1552e2',
-  };
+  }));
 
-  const value = useMemo(() => colorHash, [colorHash]);
+  const value = useMemo(() => colorHash, []);
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };
