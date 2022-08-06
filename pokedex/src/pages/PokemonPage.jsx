@@ -61,18 +61,20 @@ const PokemonPage = ({ pokemon, owned, handleClickOwned }) => {
               </p>
             ))}
           </div>
-          <div className='flex gap-x-[2vw]'>
-            <div className='flex flex-col justify-end'>
-              <p className='text-right font-bold'>Base Experience</p>
-              <p className='text-right font-bold'>Height</p>
-              <p className='text-right font-bold'>Weight</p>
-            </div>
-            <div className='flex flex-col justify-start'>
-              <p>{fullPokemon.baseExp}</p>
-              <p>{fullPokemon.height}</p>
-              <p>{fullPokemon.weight}</p>
-            </div>
-          </div>
+          <table>
+            <tr className='hover:scale-[1.2] ease-in-out transition-all'>
+              <th className='text-right font-bold pr-[2vw]'>Base Experience</th>
+              <td className='text-center'>{fullPokemon.baseExp}</td>
+            </tr>
+            <tr className='hover:scale-[1.2] ease-in-out transition-all'>
+              <th className='text-right font-bold pr-[2vw]'>Height</th>
+              <td className='text-center'>{fullPokemon.height}</td>
+            </tr>
+            <tr className='hover:scale-[1.2] ease-in-out transition-all'>
+              <th className='text-right font-bold pr-[2vw]'>Weight</th>
+              <td className='text-center'>{fullPokemon.weight}</td>
+            </tr>
+          </table>
           <div className='flex flex-col'>
             <button
               type='button'
