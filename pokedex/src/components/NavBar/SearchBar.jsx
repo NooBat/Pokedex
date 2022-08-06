@@ -68,7 +68,7 @@ const SearchBar = ({ pokedex }) => {
                   focus:bg-white hover:bg-slate-100 px-5 placeholder:text-slate-500 min-h-[40px]'
       />
       <ul
-        className={`w-full relative top-[25%] mx-auto max-h-[400px] overflow-hidden overflow-y-scroll rounded-b-[10px] ${display}`}
+        className={`w-full relative top-[25%] mx-auto max-h-[400px] shadow-2xl shadow-black overflow-hidden overflow-y-scroll rounded-b-[10px] ${display}`}
       >
         {(searchEntry.length
           ? pokedex.filter(
