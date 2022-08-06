@@ -7,7 +7,7 @@ const Footer = () => (
   <>
     <p className='text-[3vh] text-center leading-relaxed mt-[10vh] pb-[2vh] drop-shadow-sm shadow-dark'>
       <span className='font-extrabold text-[4vh]'>Pokédex App</span> by{' '}
-      <span className='text-orange-300 text-[4vh] font-extrabold'>
+      <span className='decoration-orange-400 text-[4vh] font-extrabold'>
         Daniel Nguyen
       </span>
     </p>

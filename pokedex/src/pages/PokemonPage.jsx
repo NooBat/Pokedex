@@ -38,7 +38,7 @@ const PokemonPage = ({ pokemon, owned, handleClickOwned }) => {
   }, [pokemon]);
 
   return fullPokemon.types ? (
-    <div className='pt-[10vh] w-screen h-screen '>
+    <section className='pt-[10vh] w-screen h-screen '>
       <h1 className='text-center text-[6vh] font-bold'>
         {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
       </h1>
@@ -55,7 +55,7 @@ const PokemonPage = ({ pokemon, owned, handleClickOwned }) => {
               <p
                 key={fullPokemon.name + type}
                 className='text-[2vh] px-2 rounded-full border-[0.5vh] border-black border-solid shadow-xl transition-all hover:scale-[1.2] delay-75 ease-in-out'
-                style={{ backgroundColor: colorHash[type] }}
+                style={{ backgroundColor: colorHash[type].bg_color, color: colorHash[type].text_color }}
               >
                 {type.charAt(0).toUpperCase() + type.slice(1)}
               </p>
@@ -91,7 +91,7 @@ const PokemonPage = ({ pokemon, owned, handleClickOwned }) => {
       </div>
 
       <TabComponent stats={fullPokemon.stats} moves={fullPokemon.moves} />
-    </div>
+    </section>
   ) : (
     <LoadingPage />
   );
