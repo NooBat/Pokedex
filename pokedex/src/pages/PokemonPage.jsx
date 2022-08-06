@@ -38,7 +38,7 @@ const PokemonPage = ({ pokemon, owned, handleClickOwned }) => {
   }, [pokemon]);
 
   return fullPokemon.types ? (
-    <section className='pt-[10vh] w-screen h-screen '>
+    <section className='pt-[15vh] w-screen h-screen '>
       <h1 className='text-center text-[6vh] font-bold'>
         {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
       </h1>
@@ -77,7 +77,7 @@ const PokemonPage = ({ pokemon, owned, handleClickOwned }) => {
             <button
               type='button'
               onClick={() => handleClickOwned(fullPokemon.id)}
-              className='border-solid border-2 shadow-xl transition-all hover:scale-125 hover:rounded-lg'
+              className='border-solid border-2 shadow-xl transition-all hover:font-bold hover:text-[25px] hover:scale-125 hover:rounded-lg'
               style={{
                 backgroundColor: owned ? 'green' : 'red',
                 borderColor: owned ? 'white' : 'black',
