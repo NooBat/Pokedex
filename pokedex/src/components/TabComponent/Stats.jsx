@@ -7,38 +7,46 @@ const Stats = ({ stats, tabKey }) => {
     <div
       className={
         tabKey === 1
-          ? 'h-[100%] overflow-y-scroll justify-center flex rounded-xl bg-blue-200 gap-x-[2%]'
+          ? 'h-[100%] min-h-[200px] min-w-[800px] overflow-y-scroll rounded-xl bg-blue-200 flex justify-center'
           : 'hidden'
       }
     >
-      <div className='flex flex-col my-auto content-center gap-y-[4px]'>
-        <p className='text-right font-bold'>HP</p>
-        <p className='text-right font-bold'>Attack</p>
-        <p className='text-right font-bold'>Defense</p>
-        <p className='text-right font-bold'>Special Attack</p>
-        <p className='text-right font-bold'>Special Defense</p>
-        <p className='text-right font-bold'>Speed</p>
-      </div>
-      <div className='flex flex-col my-auto content-center gap-y-[4px]'>
+      <table className='w-fit my-auto'>
         {allStats.map((stat) => (
-          <p className='text-left font-bold' key={`${stat}-${stats[stat]}`}>
-            {stats[stat]}
-          </p>
+          <>
+            <tr key={stat}>
+              <th className='text-right pr-[3vw] w-fit'>
+                {stat === 'hp'
+                  ? 'HP'
+                  : stat
+                      .split('_')
+                      .map(
+                        (token) =>
+                          token.charAt(0).toUpperCase() + token.slice(1)
+                      )
+                      .join(' ')}
+              </th>
+              <td className='text-center pr-[3vw]'>{stats[stat]}</td>
+              <td className='box-content w-[50vw] min-w-[400px] p-0 h-fit'>
+                <div
+                  className='flex border-solid border-2 bg-white border-black h-[24px]'
+                  key={`${stat}-line-${stats[stat]}`}
+                >
+                  <div
+                    className=' bg-green-500 border-r-2 border-solid border-black'
+                    style={{ width: `${(stats[stat] / 255) * 100}%` }}
+                  />
+                </div>
+              </td>
+            </tr>
+            <tr className='h-[5px]'>
+              <td />
+              <td />
+              <td />
+            </tr>
+          </>
         ))}
-      </div>
-      <div className='flex flex-col my-auto content-center gap-y-[4px] w-[60%] h-fit'>
-        {allStats.map((stat) => (
-          <div
-            className='flex border-solid border-2 bg-white border-black h-[24px]'
-            key={`${stat}-line-${stats[stat]}`}
-          >
-            <div
-              className=' bg-green-500 border-r-2 border-solid border-black'
-              style={{ width: `${(stats[stat] / 255) * 100}%` }}
-            />
-          </div>
-        ))}
-      </div>
+      </table>
     </div>
   );
 };
