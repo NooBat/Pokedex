@@ -41,7 +41,7 @@ const Footer = () => (
       >
         <GithubIcon
           className='rounded-full w-fit h-fit shadow-xl shadow-dark hover:shadow-black 
-          hover:scale-[1.1] transition-all ease-in-out delay-100'
+          hover:scale-[1.1] transition-all ease-in-out'
           id='github-icon'
         />
       </a>
