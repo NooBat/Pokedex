@@ -70,24 +70,28 @@ const App = () => {
     <ContextProvider>
       <div className='h-screen w-screen'>
         <NavBar pokedex={pokedex} />
-        <Routes>
-          <Route path='/' element={<MainPage pokemonToShow={pokemonToShow} />} />
-          <Route
-            path='/pokemons/:id'
-            element={
-              chosenPokemon ? (
-                <PokemonPage
-                  pokemon={chosenPokemon}
-                  owned={chosenPokemon.owned}
-                  handleClickOwned={handleClickOwned}
-                />
-              ) : (
-                <LoadingPage />
-              )
-            }
-          />
-        </Routes>
-        <Footer />
+        <main>
+          <Routes>
+            <Route path='/' element={<MainPage pokemonToShow={pokemonToShow} />} />
+            <Route
+              path='/pokemons/:id'
+              element={
+                chosenPokemon ? (
+                  <PokemonPage
+                    pokemon={chosenPokemon}
+                    owned={chosenPokemon.owned}
+                    handleClickOwned={handleClickOwned}
+                  />
+                ) : (
+                  <LoadingPage />
+                )
+              }
+            />
+          </Routes>
+        </main>
+        <footer>
+          <Footer />
+        </footer>      
       </div>
     </ContextProvider>
   );
