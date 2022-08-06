@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 export default function NavBar({ pokedex }) {
   return (
     <header>
-      <nav className='fixed top-0 flex w-screen h-[10vh] bg-blue-700 justify-center align-center gap-x-[2vw] z-10'>
+      <nav className='fixed top-0 flex w-screen h-[10vh] bg-blue-700 justify-center align-center gap-x-[2vw] z-10 min-h-[80px]'>
         <Link
           to='/'
           className='bg-inherit h-full w-[10vw] hover:bg-blue-600 flex justify-center'
