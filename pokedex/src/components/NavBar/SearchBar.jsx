@@ -53,7 +53,7 @@ const SearchBar = ({ pokedex }) => {
   localStorage.setItem('search-history', JSON.stringify(searchHistory));
 
   return (
-    <div className='h-fit bg-inherit w-2/5 pt-[2.5vh] rounded-[10px]'>
+    <div className='h-full bg-inherit w-2/5 rounded-[10px]'>
       <input
         type='text'
         ref={inputRef}
@@ -63,12 +63,12 @@ const SearchBar = ({ pokedex }) => {
           e.target.select();
         }}
         value={searchEntry}
-        className='box-border block w-full h-[5vh] border-[3px] border-yellow-400 border-solid 
+        className='relative box-border block w-full h-[5vh] border-[3px] top-[25%] border-yellow-400 border-solid 
                   rounded-lg overflow-hidden bg-slate-200 focus:rounded-b-none focus:rounded-t-xl 
-                  focus:bg-white hover:bg-slate-100 px-5 placeholder:text-slate-500'
+                  focus:bg-white hover:bg-slate-100 px-5 placeholder:text-slate-500 min-h-[40px]'
       />
       <ul
-        className={`w-full mx-auto max-h-[400px] overflow-hidden overflow-y-scroll rounded-b-[10px] ${display}`}
+        className={`w-full relative top-[25%] mx-auto max-h-[400px] overflow-hidden overflow-y-scroll rounded-b-[10px] ${display}`}
       >
         {(searchEntry.length
           ? pokedex.filter(
