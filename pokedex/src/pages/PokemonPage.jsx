@@ -18,8 +18,8 @@ const PokemonPage = ({ pokemon, owned, handleClickOwned }) => {
           ...pokemon,
           types: data.types.map((slot) => slot.type.name),
           baseExp: data.base_experience,
-          height: data.height,
-          weight: data.weight,
+          height: `${data.height / 10} m`,
+          weight: `${data.weight / 10} kg`,
           moves: data.moves.map((move, index) => ({
             id: index + 1,
             name: move.move.name,
