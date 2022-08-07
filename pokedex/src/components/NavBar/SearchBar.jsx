@@ -1,6 +1,8 @@
 import { React, useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import { ReactComponent as ClearIcon } from '../../assets/icons/cancel.svg';
+
 const SearchBar = ({ pokedex }) => {
   const [searchHistory, setSearchHistory] = useState(
     JSON.parse(localStorage.getItem('search-history') || '[]')
@@ -53,22 +55,34 @@ const SearchBar = ({ pokedex }) => {
   localStorage.setItem('search-history', JSON.stringify(searchHistory));
 
   return (
-    <div className='h-full bg-inherit w-2/5 rounded-[10px]'>
-      <input
-        type='text'
-        ref={inputRef}
-        placeholder='Search'
-        onChange={handleSearch}
-        onFocus={(e) => {
-          e.target.select();
-        }}
-        value={searchEntry}
-        className='relative box-border block w-full h-[5vh] border-[3px] top-[25%] border-yellow-400 border-solid 
-                  rounded-lg overflow-hidden bg-slate-200 focus:rounded-b-none focus:rounded-t-xl 
-                  focus:bg-white hover:bg-slate-100 px-5 placeholder:text-slate-500 min-h-[40px]'
-      />
+    <div className='h-full bg-inherit w-2/5 rounded-[10px] py-[1px]'>
+      <form className='h-fit w-full bg-inherit mt-[2.5vh] flex content-center'>
+        <input
+          type='text'
+          ref={inputRef}
+          placeholder='Search'
+          onChange={handleSearch}
+          onFocus={(e) => {
+            e.target.select();
+          }}
+          value={searchEntry}
+          className='box-border block w-full h-full border-[3px] border-yellow-400 border-solid 
+                    rounded-lg overflow-hidden bg-slate-200 focus:rounded-b-none focus:rounded-t-xl 
+                    focus:bg-white hover:bg-slate-100 px-5 placeholder:text-slate-500 min-h-[40px] max-h-[100px] min-w-[320px]'
+        />
+        <button 
+          type='button' 
+          onClick={(e) => {
+            e.preventDefault();
+            setSearchEntry('');  
+          }}
+          className='h-full -ml-[35px] m-auto'
+        >
+          <ClearIcon className={searchEntry === '' ? 'hidden' : 'hover:scale-[1.1] transition-all m-auto'} />
+        </button>
+      </form>
       <ul
-        className={`w-full relative top-[25%] mx-auto max-h-[400px] shadow-2xl shadow-black overflow-hidden overflow-y-scroll rounded-b-[10px] ${display}`}
+        className={`w-full mx-auto max-h-[400px] shadow-2xl shadow-black overflow-hidden overflow-y-scroll rounded-b-[10px] ${display}`}
       >
         {(searchEntry.length
           ? pokedex.filter(
