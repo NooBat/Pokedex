@@ -62,18 +62,20 @@ const PokemonPage = ({ pokemon, owned, handleClickOwned }) => {
             ))}
           </div>
           <table>
-            <tr className='hover:scale-[1.2] ease-in-out transition-all'>
-              <th className='text-right font-bold pr-[2vw]'>Base Experience</th>
-              <td className='text-center'>{fullPokemon.baseExp}</td>
-            </tr>
-            <tr className='hover:scale-[1.2] ease-in-out transition-all'>
-              <th className='text-right font-bold pr-[2vw]'>Height</th>
-              <td className='text-center'>{fullPokemon.height}</td>
-            </tr>
-            <tr className='hover:scale-[1.2] ease-in-out transition-all'>
-              <th className='text-right font-bold pr-[2vw]'>Weight</th>
-              <td className='text-center'>{fullPokemon.weight}</td>
-            </tr>
+            <tbody>
+              <tr className='hover:scale-[1.2] ease-in-out transition-all'>
+                <th className='text-right font-bold pr-[2vw]'>Base Experience</th>
+                <td className='text-center'>{fullPokemon.baseExp}</td>
+              </tr>
+              <tr className='hover:scale-[1.2] ease-in-out transition-all'>
+                <th className='text-right font-bold pr-[2vw]'>Height</th>
+                <td className='text-center'>{fullPokemon.height}</td>
+              </tr>
+              <tr className='hover:scale-[1.2] ease-in-out transition-all'>
+                <th className='text-right font-bold pr-[2vw]'>Weight</th>
+                <td className='text-center'>{fullPokemon.weight}</td>
+              </tr>
+            </tbody>
           </table>
           <div className='flex flex-col'>
             <button

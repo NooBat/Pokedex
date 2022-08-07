@@ -13,8 +13,8 @@ const Stats = ({ stats, tabKey }) => {
     >
       <table className='w-fit my-auto'>
         {allStats.map((stat) => (
-          <>
-            <tr key={stat}>
+          <tbody key={stat}>
+            <tr>
               <th className='text-right pr-[3vw] w-fit'>
                 {stat === 'hp'
                   ? 'HP'
@@ -44,7 +44,7 @@ const Stats = ({ stats, tabKey }) => {
               <td />
               <td />
             </tr>
-          </>
+          </tbody>
         ))}
       </table>
     </div>
