@@ -20,9 +20,11 @@
   "homepage": "https://github.com/NooBat/Pokedex#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "esm": "^3.2.25",
     "express": "^4.18.1"
   },
   "devDependencies": {
+    "node-fetch": "^3.2.10",
     "nodemon": "^2.0.19"
   }
 }
