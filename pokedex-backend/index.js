@@ -1,22 +1,20 @@
 // const fetch = (...args) =>
 //   import('node-fetch').then(({ default: fetch }) => fetch(...args));
+// const fs = require('fs/promises');
 
-const fs = require('fs/promises');
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
+
+const Pokemon = require('./models/pokemon');
+const { response } = require('express');
 
 const app = express();
+app.use(express.static('build'));
+app.use(express.json());
 app.use(cors());
 
-const readingFile = fs.readFile(
-  './pokemons.json',
-  { encoding: 'utf8' }
-);
-
-let pokemons = null;
-readingFile.then((result) => {
-  pokemons = JSON.parse(result).pokemons;
-})
+// const readingFile = fs.readFile('./pokemons.json', { encoding: 'utf8' });
 
 app.get('/', (request, response) => {
   // const fetchedPokemonPromise = await fetch(
@@ -71,32 +69,60 @@ app.get('/', (request, response) => {
   // fs.writeFile('./pokemons.json', jsonString, err => {
   //   console.error(err);
   // })
-
-  response.json(pokemons.filter((pokemon) => pokemon.owned));
+  response.send('Connected');
 });
 
-app.get('/api/pokemons', (request, response) => {
-  response.json(pokemons);
+app.get('/api/pokemons', async (request, response, next) => {
+  Pokemon.find({ owned: true })
+    .then((ownedPokemons) => {
+      response.json(ownedPokemons);
+    })
+    .catch((error) => next(error));
 });
 
-app.get('/api/pokemons/:id', (request, response) => {
+app.get('/api/pokemons/:id', (request, response, next) => {
   const id = Number(request.params.id);
-  const pokemon = pokemons.find((pokemon) => pokemon.id === id);
+  console.log(id);
+  Pokemon.findOne({ id })
+    .then((pokemon) => {
+      if (pokemon) {
+        response.json(pokemon);
+      } else {
+        response.statusMessage = 'Pokemon Not Found';
+        response.status(404).send(null);
+      }
+    })
+    .catch((error) => next(error));
+});
 
-  if (pokemon) {
-    response.json(pokemon);
-  } else {
-    response.statusMessage = 'Pokemon Not Found';
-    response.status(404).end();
-  }
+app.get('/api/pokemons/query', (request, response, next) => {
+
 });
 
 app.put('/api/pokemons/:id', (request, response) => {
   const id = Number(request.params.id);
   const pokemon = pokemons.find((pokemon) => pokemon.id === id);
-})
+});
 
-const PORT = 3001;
+const unknownEndpoint = () => {
+  response.status(404).send({ error: 'unknown endpoint' });
+};
+
+app.use(unknownEndpoint);
+
+const errorHandler = (error, request, response, next) => {
+  console.error(error);
+
+  if (error.name === 'CastError') {
+    response.status(400).json({ error: 'malformatted id' });
+  }
+
+  next(error);
+};
+
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
