@@ -1,19 +1,10 @@
-import { React, useState, useEffect, useContext } from 'react';
+import { React, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 import { Context } from '../contexts/Context';
 
 const PokemonBar = ({ pokemon }) => {
-  const [types, setType] = useState([]);
   const colorHash = useContext(Context);
-
-  useEffect(() => {
-    axios.get(pokemon.url).then((response) => {
-      const info = response.data;
-      setType(info.types.map((type) => type.type.name));
-    });
-  }, [pokemon.url]);
 
   return (
     <Link
@@ -35,7 +26,7 @@ const PokemonBar = ({ pokemon }) => {
           {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
         </p>
         <div className='bg-inherit flex flex-row gap-x-[0.5vw] justify-start'>
-          {types.map((type) => (
+          {pokemon.types.map((type) => (
             <p
               className='text-[2vh] px-2 rounded-full border-[0.5vh] border-black border-solid'
               style={{ backgroundColor: colorHash[type].bg_color, color: colorHash[type].text_color }}
