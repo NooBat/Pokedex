@@ -17,8 +17,14 @@ const update = (id, newPokemon) => {
   return request.then((response) => response.data);
 };
 
+const queryName = (name) => {
+  const request = axios.get(`/pokemons/query?name=${encodeURIComponent(name)}`);
+  return request.then((response) => response.data);
+}
+
 export default {
   getAll,
   getPokemon,
   update,
+  queryName,
 };

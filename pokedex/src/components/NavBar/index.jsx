@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import SearchBar from './SearchBar';
 
-export default function NavBar({ pokedex }) {
+export default function NavBar() {
   return (
     <header>
       <nav className='fixed top-0 flex w-screen h-[10vh] bg-blue-700 justify-center align-center gap-x-[2vw] z-10 min-h-[80px]'>
@@ -25,7 +25,7 @@ export default function NavBar({ pokedex }) {
             />
           </button>
         </Link>
-        <SearchBar pokedex={pokedex} />
+        <SearchBar />
       </nav>
     </header>
   );

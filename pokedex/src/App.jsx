@@ -4,7 +4,7 @@ import { Route, Routes, useMatch } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import PokemonPage from './pages/PokemonPage';
 
-// import NavBar from './components/NavBar';
+import NavBar from './components/NavBar';
 
 import ContextProvider from './contexts/Context';
 import Footer from './components/Footer';
@@ -16,36 +16,6 @@ const App = () => {
   const match = useMatch('/pokemons/:id');
 
   useEffect(() => {
-    // axios
-    //   .get('https://pokeapi.co/api/v2/pokemon/?limit=1000')
-    //   .then((response) => {
-    //     const pokemons = response.data.results.filter(
-    //       (pokemon) => pokemon.name.indexOf('-') === -1
-    //     );
-
-    //     setPokedex(
-    //       pokemons.map((pokemon) => {
-    //         const stringId = pokemon.url.slice(34, -1);
-
-    //         const newPokemon = {
-    //           id: Number(stringId),
-    //           name: pokemon.name,
-    //           url: pokemon.url,
-    //           form: `https://img.pokemondb.net/artwork/${pokemon.name}.jpg`,
-    //           owned:
-    //             Boolean(localStorage.getItem(stringId)) &&
-    //             JSON.parse(localStorage.getItem(stringId)),
-    //         };
-
-    //         localStorage.setItem(
-    //           String(newPokemon.id),
-    //           String(newPokemon.owned)
-    //         );
-
-    //         return newPokemon;
-    //       })
-    //     );
-    //   });
     pokemonService.getAll().then((response) => {
       setOwnedPokemon(response);
     });
@@ -78,7 +48,7 @@ const App = () => {
   return (
     <ContextProvider>
       <div className='h-screen w-screen'>
-        {/* <NavBar pokedex={id} /> */}
+        <NavBar />
         <main>
           <Routes>
             <Route
