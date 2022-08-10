@@ -7,41 +7,14 @@ import pokemonService from '../services/pokemons';
 
 const PokemonPage = ({ id, handleClickOwned }) => {
   const [pokemon, setPokemon] = useState(null);
+  const [owned, setOwned] = useState(null);
   const colorHash = useContext(Context);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(pokemon.url)
-  //     .then((response) => response.data)
-  //     .then((data) => {
-  //       setFullPokemon({
-  //         ...pokemon,
-  //         types: data.types.map((slot) => slot.type.name),
-  //         baseExp: data.base_experience,
-  //         height: `${data.height / 10} m`,
-  //         weight: `${data.weight / 10} kg`,
-  //         moves: data.moves.map((move, index) => ({
-  //           id: index + 1,
-  //           name: move.move.name,
-  //           level: move.version_group_details[0].level_learned_at,
-  //         })),
-  //         stats: {
-  //           hp: data.stats[0].base_stat,
-  //           attack: data.stats[1].base_stat,
-  //           defense: data.stats[2].base_stat,
-  //           special_attack: data.stats[3].base_stat,
-  //           special_defense: data.stats[4].base_stat,
-  //           speed: data.stats[5].base_stat,
-  //         },
-  //       });
-  //     });
-  // }, [pokemon]);
   useEffect(() => {
-    pokemonService
-      .getPokemon(id)
-      .then((response) => {
-        setPokemon(response);
-      })
+    pokemonService.getPokemon(id).then((response) => {
+      setPokemon(response);
+      setOwned(response.owned);
+    });
   }, [id]);
 
   return pokemon ? (
@@ -62,7 +35,10 @@ const PokemonPage = ({ id, handleClickOwned }) => {
               <p
                 key={pokemon.name + type}
                 className='text-[2vh] px-2 rounded-full border-[0.5vh] border-black border-solid shadow-xl transition-all hover:scale-[1.2] delay-75 ease-in-out'
-                style={{ backgroundColor: colorHash[type].bg_color, color: colorHash[type].text_color }}
+                style={{
+                  backgroundColor: colorHash[type].bg_color,
+                  color: colorHash[type].text_color,
+                }}
               >
                 {type.charAt(0).toUpperCase() + type.slice(1)}
               </p>
@@ -71,7 +47,9 @@ const PokemonPage = ({ id, handleClickOwned }) => {
           <table>
             <tbody>
               <tr className='hover:scale-[1.2] ease-in-out transition-all'>
-                <th className='text-right font-bold pr-[2vw]'>Base Experience</th>
+                <th className='text-right font-bold pr-[2vw]'>
+                  Base Experience
+                </th>
                 <td className='text-center'>{pokemon.baseExp}</td>
               </tr>
               <tr className='hover:scale-[1.2] ease-in-out transition-all'>
@@ -87,15 +65,18 @@ const PokemonPage = ({ id, handleClickOwned }) => {
           <div className='flex flex-col'>
             <button
               type='button'
-              onClick={() => handleClickOwned(pokemon)}
+              onClick={() => {
+                setOwned(!owned);
+                handleClickOwned(pokemon);
+              }}
               className='border-solid border-2 shadow-xl transition-all hover:font-bold hover:text-[25px] hover:scale-125 hover:rounded-lg'
               style={{
-                backgroundColor: pokemon.owned ? 'green' : 'red',
-                borderColor: pokemon.owned ? 'white' : 'black',
-                color: pokemon.owned ? 'black' : 'white',
+                backgroundColor: owned ? 'green' : 'red',
+                borderColor: owned ? 'white' : 'black',
+                color: owned ? 'black' : 'white',
               }}
             >
-              {pokemon.owned ? 'Owned' : 'Not owned'}
+              {owned ? 'Owned' : 'Not owned'}
             </button>
           </div>
         </div>

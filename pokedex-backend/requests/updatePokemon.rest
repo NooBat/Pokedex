@@ -1,0 +1,22 @@
+PUT http://localhost:3001/api/pokemons/899 HTTP/1.1
+content-type: application/json
+
+{
+  "id": 899,
+  "name": "wyrdeer",
+  "form": "https://img.pokemondb.net/artwork/wyrdeer.jpg",
+  "owned": true,
+  "types": ["normal", "psychic"],
+  "baseExp": null,
+  "height": "1.8 m",
+  "weight": "95.1 kg",
+  "moves": [],
+  "stats": {
+    "hp": 103,
+    "attack": 105,
+    "defense": 72,
+    "special_attack": 105,
+    "special_defense": 75,
+    "speed": 65
+  }
+}

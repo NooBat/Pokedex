@@ -24,7 +24,6 @@ app.get('/api/pokemons', async (request, response, next) => {
 
 app.get('/api/pokemons/:id', (request, response, next) => {
   const id = Number(request.params.id);
-  console.log(id);
   Pokemon.findOne({ id })
     .then((pokemon) => {
       if (pokemon) {
@@ -52,9 +51,19 @@ app.use('/pokemons', (request, response, next) => {
   })
 });
 
-app.put('/api/pokemons/:id', (request, response) => {
+app.put('/api/pokemons/:id', (request, response, next) => {
+  const body = request.body;
   const id = Number(request.params.id);
-  const pokemon = pokemons.find((pokemon) => pokemon.id === id);
+
+  const pokemon = {
+    ...body,
+  }
+
+  Pokemon.findOneAndUpdate({ id }, pokemon, { new: true })
+    .then((updatedPokemon) => {
+      response.json(updatedPokemon);
+    })
+    .catch((error) => next(error));
 });
 
 const unknownEndpoint = () => {

@@ -19,7 +19,7 @@ const App = () => {
     pokemonService.getAll().then((response) => {
       setOwnedPokemon(response);
     });
-  }, []);
+  });
 
   const handleClickOwned = (clickedPokemon) => {
     const newPokemon = {
@@ -36,7 +36,7 @@ const App = () => {
 
       setOwnedPokemon(
         newArray.splice(
-          ownedPokemon.find((pokemon) => pokemon.id === newPokemon.id),
+          ownedPokemon.findIndex((pokemon) => pokemon.id === newPokemon.id),
           1
         )
       );
