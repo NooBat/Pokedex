@@ -1,7 +1,12 @@
-import { React } from 'react';
+interface StatsProps {
+  stats: Stats,
+  tabKey: number,
+}
 
-const Stats = ({ stats, tabKey }) => {
-  const allStats = Object.keys(stats);
+type StatKeys = keyof Stats;
+
+const Stats = ({ stats, tabKey }: StatsProps) => {
+  const allStats = Object.keys(stats) as StatKeys[];
 
   return (
     <div
@@ -12,7 +17,7 @@ const Stats = ({ stats, tabKey }) => {
       }
     >
       <table className='w-fit my-auto'>
-        {allStats.map((stat) => (
+        {allStats.map((stat: StatKeys) => (
           <tbody key={stat}>
             <tr>
               <th className='text-right pr-[3vw] w-fit'>
@@ -21,7 +26,7 @@ const Stats = ({ stats, tabKey }) => {
                   : stat
                       .split('_')
                       .map(
-                        (token) =>
+                        (token: string) =>
                           token.charAt(0).toUpperCase() + token.slice(1)
                       )
                       .join(' ')}

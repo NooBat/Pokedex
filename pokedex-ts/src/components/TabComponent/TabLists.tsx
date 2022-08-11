@@ -1,14 +1,22 @@
-import { React } from 'react';
-
 import LoadingPage from '../../pages/LoadingPage';
 
-const TabLists = ({ tabNames, tabKey, handleClick }) => ( tabNames.length > 0 ? (
+interface TabListsProps {
+  tabNames: string[];
+  tabKey: number;
+  handleClick: (newTabKey: number) => void;
+}
+
+const TabLists = ({ tabNames, tabKey, handleClick }: TabListsProps) =>
+  tabNames.length > 0 ? (
     <ul
       className='flex mb-0 list-none ml-[10vw] flex-wrap w-[40vw]'
       role='tablist'
     >
-      {tabNames.map((tabName, index) => (
-        <li className='-mb-px last:mr-0 flex-auto text-center' key={`link${index + 1}}`}>
+      {tabNames.map((tabName: string, index: number) => (
+        <li
+          className='-mb-px last:mr-0 flex-auto text-center'
+          key={`link${index + 1}}`}
+        >
           <button
             type='button'
             className={`text-xs w-full font-bold uppercase px-5 py-3 shadow-lg rounded-t-lg block leading-normal
@@ -25,7 +33,8 @@ const TabLists = ({ tabNames, tabKey, handleClick }) => ( tabNames.length > 0 ? 
         </li>
       ))}
     </ul>
-  ) : <LoadingPage />
-);
+  ) : (
+    <LoadingPage />
+  );
 
 export default TabLists;

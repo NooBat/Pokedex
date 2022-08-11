@@ -1,20 +1,20 @@
-import { React, useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import pokemonService from '../../services/pokemons';
 import { ReactComponent as ClearIcon } from '../../assets/icons/cancel.svg';
 
 const SearchBar = () => {
-  const [searchHistory, setSearchHistory] = useState(
+  const [searchHistory, setSearchHistory] = useState<Pokemon[]>(
     JSON.parse(localStorage.getItem('search-history') || '[]')
   );
-  const [pokemons, setPokemons] = useState([]);
-  const [searchEntry, setSearchEntry] = useState('');
-  const [display, setDisplay] = useState('hidden');
-  const inputRef = useRef();
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [searchEntry, setSearchEntry] = useState<string>('');
+  const [display, setDisplay] = useState<'hidden' | 'list-item'>('hidden');
+  const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   useEffect(() => {
-    inputRef.current.addEventListener('click', (event) => {
+    inputRef.current.addEventListener('click', (event: MouseEvent) => {
       event.stopPropagation();
       setDisplay('list-item');
     });
@@ -24,20 +24,18 @@ const SearchBar = () => {
   }, []);
 
   useEffect(() => {
-    pokemonService
-      .queryName(searchEntry)
-      .then((response) => {
-        setPokemons(response);
-      })
+    pokemonService.queryName(searchEntry).then((response) => {
+      setPokemons(response);
+    });
   }, [searchEntry]);
 
-  const handleSearch = (event) => {
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchEntry(event.target.value);
   };
 
-  const handleClick = (clickedPokemon) => {
+  const handleClick = (clickedPokemon: Pokemon) => {
     const occurence = searchHistory.findIndex(
-      (pokemon) => pokemon.id === clickedPokemon.id
+      (pokemon: Pokemon) => pokemon.id === clickedPokemon.id
     );
 
     setSearchEntry(
@@ -47,7 +45,9 @@ const SearchBar = () => {
 
     if (occurence !== -1) {
       const newHistory = [...searchHistory];
-      setSearchHistory([clickedPokemon].concat(newHistory.splice(occurence, 1)));
+      setSearchHistory(
+        [clickedPokemon].concat(newHistory.splice(occurence, 1))
+      );
     } else if (searchHistory.length < 5) {
       setSearchHistory([clickedPokemon].concat(searchHistory));
     } else {
@@ -67,9 +67,9 @@ const SearchBar = () => {
         <input
           type='text'
           ref={inputRef}
-          placeholder='Search'
+          placeholder='Search Pokemon Name'
           onChange={handleSearch}
-          onFocus={(e) => {
+          onFocus={(e: React.FocusEvent<HTMLInputElement, Element>) => {
             e.target.select();
           }}
           value={searchEntry}
@@ -77,21 +77,27 @@ const SearchBar = () => {
                     rounded-lg overflow-hidden bg-slate-200 focus:rounded-b-none focus:rounded-t-xl 
                     focus:bg-white hover:bg-slate-100 px-5 placeholder:text-slate-500 min-h-[40px] max-h-[100px] min-w-[320px]'
         />
-        <button 
-          type='button' 
-          onClick={(e) => {
+        <button
+          type='button'
+          onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
             e.preventDefault();
-            setSearchEntry('');  
+            setSearchEntry('');
           }}
           className='h-full -ml-[35px] m-auto'
         >
-          <ClearIcon className={searchEntry === '' ? 'hidden' : 'hover:scale-[1.1] transition-all m-auto'} />
+          <ClearIcon
+            className={
+              searchEntry === ''
+                ? 'hidden'
+                : 'hover:scale-[1.1] transition-all m-auto'
+            }
+          />
         </button>
       </form>
       <ul
         className={`w-full mx-auto max-h-[400px] shadow-2xl shadow-black overflow-hidden overflow-y-scroll rounded-b-[10px] ${display}`}
       >
-        {pokemons.map((pokemon) => (
+        {pokemons.map((pokemon: Pokemon) => (
           <li
             key={pokemon.id}
             className='box-content bg-white h-20 hover:bg-slate-200'

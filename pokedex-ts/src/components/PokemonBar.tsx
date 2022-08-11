@@ -1,9 +1,13 @@
-import { React, useContext } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Context } from '../contexts/Context';
 
-const PokemonBar = ({ pokemon }) => {
+interface PokemonBarProps {
+  pokemon: Pokemon;
+}
+
+const PokemonBar = ({ pokemon }: PokemonBarProps) => {
   const colorHash = useContext(Context);
 
   return (
@@ -26,10 +30,13 @@ const PokemonBar = ({ pokemon }) => {
           {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
         </p>
         <div className='bg-inherit flex flex-row gap-x-[0.5vw] justify-start'>
-          {pokemon.types.map((type) => (
+          {pokemon.types.map((type: string) => (
             <p
               className='text-[2vh] px-2 rounded-full border-[0.5vh] border-black border-solid'
-              style={{ backgroundColor: colorHash[type].bg_color, color: colorHash[type].text_color }}
+              style={{
+                backgroundColor: colorHash[type].bg_color,
+                color: colorHash[type].text_color,
+              }}
               key={pokemon.name + type}
             >
               {type.charAt(0).toUpperCase() + type.slice(1)}

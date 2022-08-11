@@ -1,13 +1,18 @@
-import { React, useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import LoadingPage from './LoadingPage';
 import TabComponent from '../components/TabComponent';
 import { Context } from '../contexts/Context';
 import pokemonService from '../services/pokemons';
 
-const PokemonPage = ({ id, handleClickOwned }) => {
-  const [pokemon, setPokemon] = useState(null);
-  const [owned, setOwned] = useState(null);
+interface PokemonPageProp {
+  id: number,
+  handleClickOwned: (clickedPokemon: Pokemon) => void,
+}
+
+const PokemonPage = ({ id, handleClickOwned }: PokemonPageProp) => {
+  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  const [owned, setOwned] = useState<boolean>(false);
   const colorHash = useContext(Context);
 
   useEffect(() => {
@@ -31,7 +36,7 @@ const PokemonPage = ({ id, handleClickOwned }) => {
         />
         <div className='flex flex-col place-content-center gap-y-[2vh]'>
           <div className='flex flex-row gap-x-[2vw]'>
-            {pokemon.types.map((type) => (
+            {pokemon.types.map((type: string) => (
               <p
                 key={pokemon.name + type}
                 className='text-[2vh] px-2 rounded-full border-[0.5vh] border-black border-solid shadow-xl transition-all hover:scale-[1.2] delay-75 ease-in-out'

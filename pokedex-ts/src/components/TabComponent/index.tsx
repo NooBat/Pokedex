@@ -1,11 +1,16 @@
-import { React, useState } from 'react';
+import { useState } from 'react';
 
 import Moves from './Moves';
 import Stats from './Stats';
 import TabLists from './TabLists';
 
-export default function TabComponent({ stats, moves }) {
-  const [tabKey, setTabKey] = useState(1);
+interface TabComponentProps {
+  stats: Stats
+  moves: Move[],
+}
+
+export default function TabComponent({ stats, moves }: TabComponentProps) {
+  const [tabKey, setTabKey] = useState<number>(1);
 
   return (
     <div className='flex flex-wrap absolute bottom-0 w-full'>
@@ -13,7 +18,7 @@ export default function TabComponent({ stats, moves }) {
         <TabLists
           tabNames={['Stats', 'Moves']}
           tabKey={tabKey}
-          handleClick={(newTabKey) => {
+          handleClick={(newTabKey: number) => {
             setTabKey(newTabKey);
           }}
         />

@@ -1,6 +1,9 @@
-import { React } from 'react';
+interface MovesProps {
+  moves: Move[],
+  tabKey: number,
+}
 
-const Moves = ({ moves, tabKey }) => (
+const Moves = ({ moves, tabKey }: MovesProps) => (
   <div
     className={
       tabKey === 2
@@ -8,7 +11,7 @@ const Moves = ({ moves, tabKey }) => (
         : 'hidden'
     }
   >
-    {moves.map((move) => (
+    {moves.map((move: Move) => (
       <div
         key={move.id}
         className='border-solid border-t-4 border-x-2 bg-white border-blue-400 shadow-2xl rounded-xl hover:scale-[1.1] transition-all ease-in-out'

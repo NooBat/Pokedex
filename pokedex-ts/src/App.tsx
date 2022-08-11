@@ -11,30 +11,6 @@ import Footer from './components/Footer';
 
 import pokemonService from './services/pokemons';
 
-interface Pokemon {
-  id: number,
-  name: string,
-  form: string,
-  owned: boolean,
-  types: string[],
-  baseExp: number,
-  height: string,
-  weight: string,
-  moves: {
-    id: number,
-    name: string,
-    level: number,
-  }[],
-  stats: {
-    hp: number,
-    attack: number,
-    defense: number,
-    special_attack: number,
-    special_defense: number,
-    speed: number,
-  },
-};
-
 const App = () => {
   const [ownedPokemons, setOwnedPokemons] = useState<Pokemon[]>([]);
   const match = useMatch('/pokemons/:id');
@@ -43,7 +19,7 @@ const App = () => {
     pokemonService.getAll().then((pokemons: Pokemon[]) => {
       setOwnedPokemons(pokemons);
     });
-  });
+  }, [ownedPokemons]);
 
   const handleClickOwned = (clickedPokemon: Pokemon) => {
     const newPokemon: Pokemon = {
@@ -60,14 +36,16 @@ const App = () => {
 
       setOwnedPokemons(
         newPokemonsArray.splice(
-          ownedPokemons.findIndex((pokemon: Pokemon) => pokemon.id === newPokemon.id),
+          ownedPokemons.findIndex(
+            (pokemon: Pokemon) => pokemon.id === newPokemon.id
+          ),
           1
         )
       );
     }
   };
 
-  const id = match ? Number(match.params.id) : null;
+  const id: number = match ? Number(match.params.id) : 0;
 
   return (
     <ContextProvider>
@@ -77,7 +55,7 @@ const App = () => {
           <Routes>
             <Route
               path='/'
-              element={<MainPage pokemonToShow={ownedPokemons} />}
+              element={<MainPage ownedPokemon={ownedPokemons} />}
             />
             <Route
               path='/pokemons/:id'
