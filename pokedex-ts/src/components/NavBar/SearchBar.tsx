@@ -53,8 +53,17 @@ const SearchBar = () => {
 
   useEffect(() => {
     if (searchEntry !== '') {
-      pokemonService.queryName(searchEntry).then((response) => {
-        setPokemons(response);
+      pokemonService.queryName(searchEntry).then((queryList: Pokemon[]) => {
+        setPokemons(
+          queryList.sort((a, b) => {
+            if (a.name > b.name) {
+              return 1;
+            } else if (a.name < b.name) {
+              return -1;
+            }
+            return 0;
+          })
+        );
       });
     } else {
       setPokemons(searchHistory);
@@ -78,19 +87,13 @@ const SearchBar = () => {
     if (occurence !== -1) {
       setSearchHistory(
         [clickedPokemon].concat(
-          searchHistory
-            .slice(0, occurence)
-            .concat(searchHistory.slice(occurence + 1))
+          searchHistory.slice(0, occurence).concat(searchHistory.slice(occurence + 1))
         )
       );
     } else if (searchHistory.length < 5) {
       setSearchHistory([clickedPokemon].concat(searchHistory));
     } else {
-      setSearchHistory(
-        [clickedPokemon].concat(
-          searchHistory.slice(0, searchHistory.length - 1)
-        )
-      );
+      setSearchHistory([clickedPokemon].concat(searchHistory.slice(0, searchHistory.length - 1)));
     }
   };
 
@@ -110,7 +113,7 @@ const SearchBar = () => {
           value={searchEntry}
           className='box-border block w-full h-full border-[3px] border-yellow-400 border-solid
                     rounded-lg overflow-hidden bg-slate-200 focus:rounded-b-none focus:rounded-t-xl
-                    focus:bg-white hover:bg-slate-100 px-5 placeholder:text-slate-500 min-h-[40px] max-h-[100px] min-w-[320px]'
+                    focus:bg-white hover:bg-slate-100 px-5 placeholder:text-slate-500 min-h-[40px] max-h-[100px]'
         />
         <button
           type='button'
@@ -121,11 +124,7 @@ const SearchBar = () => {
           className='h-full -ml-[35px] m-auto'
         >
           <ClearIcon
-            className={
-              searchEntry === ''
-                ? 'hidden'
-                : 'hover:scale-[1.1] transition-all m-auto'
-            }
+            className={searchEntry === '' ? 'hidden' : 'hover:scale-[1.1] transition-all m-auto'}
           />
         </button>
       </form>
@@ -133,10 +132,7 @@ const SearchBar = () => {
         className={`w-full mx-auto max-h-[400px] shadow-2xl shadow-black overflow-hidden overflow-y-scroll rounded-b-[10px] ${display}`}
       >
         {pokemons.map((pokemon: Pokemon) => (
-          <li
-            key={pokemon.id}
-            className='box-content bg-white h-20 hover:bg-slate-200'
-          >
+          <li key={pokemon.id} className='box-content bg-white h-20 hover:bg-slate-200'>
             <Link to={`/pokemons/${pokemon.id}`} className='bg-inherit'>
               <button
                 type='button'
@@ -146,11 +142,7 @@ const SearchBar = () => {
                   handleClick(pokemon);
                 }}
               >
-                <img
-                  className='w-20 h-[80px]'
-                  src={pokemon.form}
-                  alt={`form of ${pokemon.name}`}
-                />
+                <img className='w-20 h-[80px]' src={pokemon.form} alt={`form of ${pokemon.name}`} />
                 <h3 className='ml-5 my-auto bg-inherit font-bold'>
                   {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
                 </h3>

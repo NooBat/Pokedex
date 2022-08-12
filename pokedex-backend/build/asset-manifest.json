@@ -1,19 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.2245f1b2.css",
-    "main.js": "/static/js/main.9f7336a8.js",
+    "main.css": "/static/css/main.15f25380.css",
+    "main.js": "/static/js/main.09e3702e.js",
     "static/media/cryingPikachu.png": "/static/media/cryingPikachu.8adb2ae6a018644765e6.png",
+    "static/media/pokemon-23.svg": "/static/media/pokemon-23.17b2d8c1482f004467895f547c5a57f7.svg",
     "static/media/loadingIcon.svg": "/static/media/loadingIcon.c51882edc39b8fbbbca9811eb98dab75.svg",
     "static/media/github.svg": "/static/media/github.4da55b7643662abb4209bceac2c65830.svg",
     "index.html": "/index.html",
     "static/media/linkedin.svg": "/static/media/linkedin.b53a851cf55a71605b04499e29b04656.svg",
     "static/media/cancel.svg": "/static/media/cancel.20ff9b05119dfe6b88162fb13f01f758.svg",
     "static/media/facebook.svg": "/static/media/facebook.36d45898cfda5b2f1a0a5ed86420c967.svg",
-    "main.2245f1b2.css.map": "/static/css/main.2245f1b2.css.map",
-    "main.9f7336a8.js.map": "/static/js/main.9f7336a8.js.map"
+    "main.15f25380.css.map": "/static/css/main.15f25380.css.map",
+    "main.09e3702e.js.map": "/static/js/main.09e3702e.js.map"
   },
   "entrypoints": [
-    "static/css/main.2245f1b2.css",
-    "static/js/main.9f7336a8.js"
+    "static/css/main.15f25380.css",
+    "static/js/main.09e3702e.js"
   ]
 }
