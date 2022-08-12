@@ -113,7 +113,7 @@ const SearchBar = () => {
           value={searchEntry}
           className='box-border block w-full h-full border-[3px] border-yellow-400 border-solid
                     rounded-lg overflow-hidden bg-slate-200 focus:rounded-b-none focus:rounded-t-xl
-                    focus:bg-white hover:bg-slate-100 px-5 placeholder:text-slate-500 min-h-[40px] max-h-[100px] min-w-[320px]'
+                    focus:bg-white hover:bg-slate-100 px-5 placeholder:text-slate-500 min-h-[40px] max-h-[100px]'
         />
         <button
           type='button'
