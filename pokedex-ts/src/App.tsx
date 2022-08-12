@@ -12,31 +12,31 @@ import Footer from './components/Footer';
 import pokemonService from './services/pokemons';
 
 interface Move {
-  id: number,
-  name: string,
-  level: number,
+  id: number;
+  name: string;
+  level: number;
 }
 
 interface Stats {
-  hp: number,
-  attack: number,
-  defense: number,
-  special_attack: number,
-  special_defense: number,
-  speed: number,
+  hp: number;
+  attack: number;
+  defense: number;
+  special_attack: number;
+  special_defense: number;
+  speed: number;
 }
 
 interface Pokemon {
-  id: number,
-  name: string,
-  form: string,
-  owned: boolean,
-  types: string[],
-  baseExp: number,
-  height: string,
-  weight: string,
-  moves: Move[],
-  stats: Stats,
+  id: number;
+  name: string;
+  form: string;
+  owned: boolean;
+  types: string[];
+  baseExp: number;
+  height: string;
+  weight: string;
+  moves: Move[];
+  stats: Stats;
 }
 
 function App() {
@@ -44,15 +44,20 @@ function App() {
   const match = useMatch('/pokemons/:id');
 
   useEffect(() => {
-    pokemonService.getAll().then((pokemons: Pokemon[]) => {
-      setOwnedPokemons(pokemons);
-    });
+    pokemonService
+      .getAll()
+      .then((pokemons: Pokemon[]) => {
+        setOwnedPokemons(pokemons);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, [ownedPokemons]);
 
   const handleClickOwned = (clickedPokemon: Pokemon) => {
     const newPokemon: Pokemon = {
       ...clickedPokemon,
-      owned: !clickedPokemon.owned,
+      owned: !clickedPokemon.owned
     };
 
     pokemonService.update(clickedPokemon.id, newPokemon);
@@ -65,10 +70,10 @@ function App() {
       setOwnedPokemons(
         newPokemonsArray.splice(
           ownedPokemons.findIndex(
-            (pokemon: Pokemon) => pokemon.id === newPokemon.id,
+            (pokemon: Pokemon) => pokemon.id === newPokemon.id
           ),
-          1,
-        ),
+          1
+        )
       );
     }
   };
@@ -77,16 +82,16 @@ function App() {
 
   return (
     <ContextProvider>
-      <div className="h-screen w-screen">
+      <div className='h-screen w-screen'>
         <NavBar />
         <main>
           <Routes>
             <Route
-              path="/"
+              path='/'
               element={<MainPage ownedPokemon={ownedPokemons} />}
             />
             <Route
-              path="/pokemons/:id"
+              path='/pokemons/:id'
               element={
                 <PokemonPage id={id} handleClickOwned={handleClickOwned} />
               }

@@ -24,6 +24,7 @@ pokemonsRouter.get('/:id', (request, response, next) => {
 });
 
 pokemonsRouter.use((request, response, next) => {
+  response.send({ message: 'from here' });
   const filters = request.query;
 
   if (filters.name) {

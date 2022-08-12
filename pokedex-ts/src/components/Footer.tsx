@@ -5,7 +5,9 @@ import { ReactComponent as GithubIcon } from '../assets/logos/github.svg';
 const Footer = () => (
   <>
     <p className='text-[3vh] text-center leading-relaxed mt-[10vh] pb-[2vh] drop-shadow-sm shadow-dark'>
-      <span className='font-extrabold text-[4vh]'>Pokédex App</span> by{' '}
+      <span className='font-extrabold text-[4vh]'>Pokédex App</span>
+      by
+      {' '}
       <span className='decoration-orange-400 text-[4vh] font-extrabold'>
         Daniel Nguyen
       </span>
@@ -17,7 +19,7 @@ const Footer = () => (
         rel='noreferrer noopener'
       >
         <FacebookIcon
-          className='rounded-full w-fit h-fit shadow-xl shadow-dark hover:shadow-black 
+          className='rounded-full w-fit h-fit shadow-xl shadow-dark hover:shadow-black
           hover:scale-[1.1] transition-all ease-in-out delay-100'
           id='facebook-icon'
         />
@@ -28,7 +30,7 @@ const Footer = () => (
         rel='noreferrer noopener'
       >
         <LinkedInIcon
-          className='rounded-full w-fit h-fit shadow-xl shadow-dark hover:shadow-black 
+          className='rounded-full w-fit h-fit shadow-xl shadow-dark hover:shadow-black
                     hover:scale-[1.1] transition-all ease-in-out delay-100'
           id='linkedin-icon'
         />
@@ -39,7 +41,7 @@ const Footer = () => (
         rel='noreferrer noopener'
       >
         <GithubIcon
-          className='rounded-full w-fit h-fit shadow-xl shadow-dark hover:shadow-black 
+          className='rounded-full w-fit h-fit shadow-xl shadow-dark hover:shadow-black
           hover:scale-[1.1] transition-all ease-in-out'
           id='github-icon'
         />

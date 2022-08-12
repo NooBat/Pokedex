@@ -5,6 +5,34 @@ import TabComponent from '../components/TabComponent';
 import { Context } from '../contexts/Context';
 import pokemonService from '../services/pokemons';
 
+interface Move {
+  id: number,
+  name: string,
+  level: number,
+}
+
+interface Stats {
+  hp: number,
+  attack: number,
+  defense: number,
+  special_attack: number,
+  special_defense: number,
+  speed: number,
+}
+
+interface Pokemon {
+  id: number,
+  name: string,
+  form: string,
+  owned: boolean,
+  types: string[],
+  baseExp: number,
+  height: string,
+  weight: string,
+  moves: Move[],
+  stats: Stats,
+}
+
 interface PokemonPageProp {
   id: number,
   handleClickOwned: (clickedPokemon: Pokemon) => void,
@@ -42,7 +70,7 @@ const PokemonPage = ({ id, handleClickOwned }: PokemonPageProp) => {
                 className='text-[2vh] px-2 rounded-full border-[0.5vh] border-black border-solid shadow-xl transition-all hover:scale-[1.2] delay-75 ease-in-out'
                 style={{
                   backgroundColor: colorHash[type].bg_color,
-                  color: colorHash[type].text_color,
+                  color: colorHash[type].text_color
                 }}
               >
                 {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -78,7 +106,7 @@ const PokemonPage = ({ id, handleClickOwned }: PokemonPageProp) => {
               style={{
                 backgroundColor: owned ? 'green' : 'red',
                 borderColor: owned ? 'white' : 'black',
-                color: owned ? 'black' : 'white',
+                color: owned ? 'black' : 'white'
               }}
             >
               {owned ? 'Owned' : 'Not owned'}

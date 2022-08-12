@@ -3,6 +3,34 @@ import { Link } from 'react-router-dom';
 
 import { Context } from '../contexts/Context';
 
+interface Move {
+  id: number;
+  name: string;
+  level: number;
+}
+
+interface Stats {
+  hp: number;
+  attack: number;
+  defense: number;
+  special_attack: number;
+  special_defense: number;
+  speed: number;
+}
+
+interface Pokemon {
+  id: number;
+  name: string;
+  form: string;
+  owned: boolean;
+  types: string[];
+  baseExp: number;
+  height: string;
+  weight: string;
+  moves: Move[];
+  stats: Stats;
+}
+
 interface PokemonBarProps {
   pokemon: Pokemon;
 }
@@ -13,7 +41,7 @@ const PokemonBar = ({ pokemon }: PokemonBarProps) => {
   return (
     <Link
       to={`/pokemons/${pokemon.id}`}
-      className='box-border flex gap-x-[1vw] bg-white hover:bg-gray-300 rounded-xl 
+      className='box-border flex gap-x-[1vw] bg-white hover:bg-gray-300 rounded-xl
       border-solid border-black border-[0.5vh] shadow-xl shadow-dark mx-auto my-[1vh] w-[52vw] h-[15vh] min-w-[400px]
       min-h-[80px] ease-in-out hover:scale-[1.1] transform-gpu transition-all'
       onClick={() => {
@@ -35,7 +63,7 @@ const PokemonBar = ({ pokemon }: PokemonBarProps) => {
               className='text-[2vh] px-2 rounded-full border-[0.5vh] border-black border-solid'
               style={{
                 backgroundColor: colorHash[type].bg_color,
-                color: colorHash[type].text_color,
+                color: colorHash[type].text_color
               }}
               key={pokemon.name + type}
             >

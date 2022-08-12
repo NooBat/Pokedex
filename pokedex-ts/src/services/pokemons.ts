@@ -58,7 +58,7 @@ const pokemonService = {
   getAll,
   getPokemon,
   update,
-  queryName,
+  queryName
 };
 
 export default pokemonService;

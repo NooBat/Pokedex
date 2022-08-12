@@ -1,3 +1,9 @@
+interface Move {
+  id: number,
+  name: string,
+  level: number,
+}
+
 interface MovesProps {
   moves: Move[],
   tabKey: number,

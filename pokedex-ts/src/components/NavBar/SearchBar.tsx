@@ -4,6 +4,34 @@ import { Link } from 'react-router-dom';
 import pokemonService from '../../services/pokemons';
 import { ReactComponent as ClearIcon } from '../../assets/icons/cancel.svg';
 
+interface Move {
+  id: number,
+  name: string,
+  level: number,
+}
+
+interface Stats {
+  hp: number,
+  attack: number,
+  defense: number,
+  special_attack: number,
+  special_defense: number,
+  speed: number,
+}
+
+interface Pokemon {
+  id: number,
+  name: string,
+  form: string,
+  owned: boolean,
+  types: string[],
+  baseExp: number,
+  height: string,
+  weight: string,
+  moves: Move[],
+  stats: Stats,
+}
+
 const SearchBar = () => {
   const [searchHistory, setSearchHistory] = useState<Pokemon[]>(
     JSON.parse(localStorage.getItem('search-history') || '[]')
@@ -39,8 +67,8 @@ const SearchBar = () => {
     );
 
     setSearchEntry(
-      clickedPokemon.name.charAt(0).toUpperCase() +
-        clickedPokemon.name.slice(1, clickedPokemon.name.length)
+      clickedPokemon.name.charAt(0).toUpperCase()
+        + clickedPokemon.name.slice(1, clickedPokemon.name.length)
     );
 
     if (occurence !== -1) {
@@ -73,8 +101,8 @@ const SearchBar = () => {
             e.target.select();
           }}
           value={searchEntry}
-          className='box-border block w-full h-full border-[3px] border-yellow-400 border-solid 
-                    rounded-lg overflow-hidden bg-slate-200 focus:rounded-b-none focus:rounded-t-xl 
+          className='box-border block w-full h-full border-[3px] border-yellow-400 border-solid
+                    rounded-lg overflow-hidden bg-slate-200 focus:rounded-b-none focus:rounded-t-xl
                     focus:bg-white hover:bg-slate-100 px-5 placeholder:text-slate-500 min-h-[40px] max-h-[100px] min-w-[320px]'
         />
         <button

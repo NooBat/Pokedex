@@ -1,11 +1,20 @@
+interface Stats {
+  hp: number;
+  attack: number;
+  defense: number;
+  special_attack: number;
+  special_defense: number;
+  speed: number;
+}
+
 interface StatsProps {
-  stats: Stats,
-  tabKey: number,
+  stats: Stats;
+  tabKey: number;
 }
 
 type StatKeys = keyof Stats;
 
-const Stats = ({ stats, tabKey }: StatsProps) => {
+const Statistics = ({ stats, tabKey }: StatsProps) => {
   const allStats = Object.keys(stats) as StatKeys[];
 
   return (
@@ -24,12 +33,11 @@ const Stats = ({ stats, tabKey }: StatsProps) => {
                 {stat === 'hp'
                   ? 'HP'
                   : stat
-                      .split('_')
-                      .map(
-                        (token: string) =>
-                          token.charAt(0).toUpperCase() + token.slice(1)
-                      )
-                      .join(' ')}
+                    .split('_')
+                    .map(
+                      (token: string) => token.charAt(0).toUpperCase() + token.slice(1)
+                    )
+                    .join(' ')}
               </th>
               <td className='text-center pr-[3vw]'>{stats[stat]}</td>
               <td className='box-content w-[50vw] min-w-[400px] p-0 h-fit'>
@@ -56,4 +64,4 @@ const Stats = ({ stats, tabKey }: StatsProps) => {
   );
 };
 
-export default Stats;
+export default Statistics;

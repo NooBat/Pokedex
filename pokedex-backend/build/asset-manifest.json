@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2245f1b2.css",
+    "main.js": "/static/js/main.db0bd54a.js",
+    "static/media/cryingPikachu.png": "/static/media/cryingPikachu.8adb2ae6a018644765e6.png",
+    "static/media/loadingIcon.svg": "/static/media/loadingIcon.c51882edc39b8fbbbca9811eb98dab75.svg",
+    "static/media/github.svg": "/static/media/github.4da55b7643662abb4209bceac2c65830.svg",
+    "index.html": "/index.html",
+    "static/media/linkedin.svg": "/static/media/linkedin.b53a851cf55a71605b04499e29b04656.svg",
+    "static/media/cancel.svg": "/static/media/cancel.20ff9b05119dfe6b88162fb13f01f758.svg",
+    "static/media/facebook.svg": "/static/media/facebook.36d45898cfda5b2f1a0a5ed86420c967.svg",
+    "main.2245f1b2.css.map": "/static/css/main.2245f1b2.css.map",
+    "main.db0bd54a.js.map": "/static/js/main.db0bd54a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2245f1b2.css",
+    "static/js/main.db0bd54a.js"
+  ]
+}

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ReactComponent as LoadingIcon } from '../assets/icons/loadingIcon.svg';
 import cryingPikachu from '../assets/icons/cryingPikachu.png';
-import React from 'react';
 
 const LoadingPage = () => {
   const [loading, setLoading] = useState<boolean>(true);

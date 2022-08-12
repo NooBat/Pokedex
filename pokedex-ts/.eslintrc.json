@@ -27,6 +27,20 @@
     "prettier"
   ],
   "rules": {
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "only-multiline",
+        "objects": "only-multiline",
+        "imports": "never",
+        "exports": "never",
+        "functions": "never"
+      }
+    ],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error"
+    ],
     "indent": [
       "error",
       2
@@ -44,7 +58,7 @@
     ],
     "jsx-quotes": [
       "error",
-      "single"
+      "prefer-single"
     ],
     "semi": [
       "error",
