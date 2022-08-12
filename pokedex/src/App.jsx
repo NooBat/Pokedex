@@ -19,7 +19,7 @@ const App = () => {
     pokemonService.getAll().then((response) => {
       setOwnedPokemon(response);
     });
-  });
+  }, [ownedPokemon]);
 
   const handleClickOwned = (clickedPokemon) => {
     const newPokemon = {

@@ -1,10 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { createContext, useMemo } from 'react';
 
-import { React, createContext, useMemo } from 'react';
+export const Context = createContext({});
 
-export const Context = createContext();
+// interface ContextProviderProps {
+//   children:
+// }
 
-const ContextProvider = ({ children }) => {
+function ContextProvider({ children }) {
+  console.log(typeof children);
   const colorHash = useMemo(() => ({
     bug: {
       bg_color: '#3b9950',
@@ -44,7 +48,7 @@ const ContextProvider = ({ children }) => {
     },
     grass: {
       bg_color: '#27c84f',
-      text_color: '#000'
+      text_color: '#000',
     },
     ground: {
       bg_color: '#6e491f',
@@ -64,7 +68,7 @@ const ContextProvider = ({ children }) => {
     },
     psychic: {
       bg_color: '#f81c91',
-      text_color: '#000'
+      text_color: '#000',
     },
     rock: {
       bg_color: '#8b3e21',
@@ -83,6 +87,6 @@ const ContextProvider = ({ children }) => {
   const value = useMemo(() => colorHash, []);
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
-};
+}
 
 export default ContextProvider;
