@@ -27,7 +27,7 @@ const pokemonSchema = new mongoose.Schema({
   },
 });
 
-pokemonSchema.set('toJson', {
+pokemonSchema.set('toJSON', {
   transform: (document, returnedPokemon) => {
     delete returnedPokemon._id;
     delete returnedPokemon.__v;

@@ -49,7 +49,7 @@ const update = async (id: number, newPokemon: Pokemon) => {
 };
 
 const queryName = async (name: string) => {
-  const request = axios.get(`${baseUrl}?name=${encodeURIComponent(name)}`);
+  const request = axios.get(`/pokemons?name=${encodeURIComponent(name)}`);
   const response = await request;
   return response.data;
 };

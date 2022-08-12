@@ -5,31 +5,31 @@ import pokemonService from '../../services/pokemons';
 import { ReactComponent as ClearIcon } from '../../assets/icons/cancel.svg';
 
 interface Move {
-  id: number,
-  name: string,
-  level: number,
+  id: number;
+  name: string;
+  level: number;
 }
 
 interface Stats {
-  hp: number,
-  attack: number,
-  defense: number,
-  special_attack: number,
-  special_defense: number,
-  speed: number,
+  hp: number;
+  attack: number;
+  defense: number;
+  special_attack: number;
+  special_defense: number;
+  speed: number;
 }
 
 interface Pokemon {
-  id: number,
-  name: string,
-  form: string,
-  owned: boolean,
-  types: string[],
-  baseExp: number,
-  height: string,
-  weight: string,
-  moves: Move[],
-  stats: Stats,
+  id: number;
+  name: string;
+  form: string;
+  owned: boolean;
+  types: string[];
+  baseExp: number;
+  height: string;
+  weight: string;
+  moves: Move[];
+  stats: Stats;
 }
 
 const SearchBar = () => {
@@ -52,10 +52,14 @@ const SearchBar = () => {
   }, []);
 
   useEffect(() => {
-    pokemonService.queryName(searchEntry).then((response) => {
-      setPokemons(response);
-    });
-  }, [display]);
+    if (searchEntry !== '') {
+      pokemonService.queryName(searchEntry).then((response) => {
+        setPokemons(response);
+      });
+    } else {
+      setPokemons(searchHistory);
+    }
+  }, [searchEntry]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchEntry(event.target.value);
@@ -72,9 +76,12 @@ const SearchBar = () => {
     );
 
     if (occurence !== -1) {
-      const newHistory = [...searchHistory];
       setSearchHistory(
-        [clickedPokemon].concat(newHistory.splice(occurence, 1))
+        [clickedPokemon].concat(
+          searchHistory
+            .slice(0, occurence)
+            .concat(searchHistory.slice(occurence + 1))
+        )
       );
     } else if (searchHistory.length < 5) {
       setSearchHistory([clickedPokemon].concat(searchHistory));

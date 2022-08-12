@@ -39,25 +39,23 @@ interface Pokemon {
   stats: Stats;
 }
 
-function App() {
+const App = () => {
   const [ownedPokemons, setOwnedPokemons] = useState<Pokemon[]>([]);
   const match = useMatch('/pokemons/:id');
 
   useEffect(() => {
-    pokemonService
-      .getAll()
+    pokemonService.getAll()
       .then((pokemons: Pokemon[]) => {
-        setOwnedPokemons(pokemons);
-      })
-      .catch((err) => {
-        console.error(err);
+        if (JSON.stringify(pokemons) !== JSON.stringify(ownedPokemons)) {
+          setOwnedPokemons(pokemons);
+        }
       });
   }, [ownedPokemons]);
 
   const handleClickOwned = (clickedPokemon: Pokemon) => {
     const newPokemon: Pokemon = {
       ...clickedPokemon,
-      owned: !clickedPokemon.owned
+      owned: !clickedPokemon.owned,
     };
 
     pokemonService.update(clickedPokemon.id, newPokemon);
@@ -104,6 +102,6 @@ function App() {
       </div>
     </ContextProvider>
   );
-}
+};
 
 export default App;

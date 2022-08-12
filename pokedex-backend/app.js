@@ -24,10 +24,7 @@ app.use(cors());
 app.use(express.static('build'));
 app.use(express.json());
 
-morgan.token('content', (request, response) => {
-  console.log(response);
-  return JSON.stringify(request.body)
-});
+morgan.token('content', (request, response) => JSON.stringify(request.body));
 app.use(
   morgan(
     `
@@ -44,6 +41,7 @@ Content: :content
 
 app.use('/api/pokemons', pokemonsRouter);
 
+app.use('/pokemons', middleware.queryHandler);
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 

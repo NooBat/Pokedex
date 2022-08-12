@@ -23,23 +23,24 @@ pokemonsRouter.get('/:id', (request, response, next) => {
     .catch((error) => next(error));
 });
 
-pokemonsRouter.use((request, response, next) => {
-  response.send({ message: 'from here' });
-  const filters = request.query;
+// pokemonsRouter.use((request, response, next) => {
+//   const filters = request.query;
 
-  if (filters.name) {
-    filters.name = { $regex: '^' + filters.name, $options: 'i' };
-  }
-  if (filters.types) {
-    filters.types = { $all: filters.types };
-  }
+//   if (filters.name) {
+//     filters.name = { $regex: '^' + filters.name, $options: 'i' };
+//   }
+//   if (filters.types) {
+//     filters.types = { $all: filters.types };
+//   }
 
-  Pokemon.find(filters)
-    .then((pokemons) => {
-      response.json(pokemons);
-    })
-    .catch((error) => next(error));
-});
+//   console.log(filters);
+
+//   Pokemon.find(filters)
+//     .then((pokemons) => {
+//       response.json(pokemons);
+//     })
+//     .catch((error) => next(error));
+// });
 
 pokemonsRouter.put('/:id', (request, response, next) => {
   const body = request.body;
