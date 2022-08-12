@@ -27,7 +27,7 @@ const SearchBar = () => {
     pokemonService.queryName(searchEntry).then((response) => {
       setPokemons(response);
     });
-  }, [searchEntry]);
+  }, [display]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchEntry(event.target.value);

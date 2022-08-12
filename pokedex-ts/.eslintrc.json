@@ -5,7 +5,7 @@
   },
   "extends": [
     "plugin:react/recommended",
-    "airbnb-typescript",
+    "airbnb",
     "plugin:react/jsx-runtime"
   ],
   "parser": "@typescript-eslint/parser",
@@ -30,6 +30,16 @@
           ".jsx",
           ".tsx"
         ]
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
       }
     ]
   }

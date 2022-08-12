@@ -1,14 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { createContext, useMemo } from 'react';
+import React, { createContext, useMemo } from 'react';
 
 export const Context = createContext({});
 
-// interface ContextProviderProps {
-//   children:
-// }
+interface ContextProviderProps {
+  children: React.ReactNode,
+}
 
-function ContextProvider({ children }) {
-  console.log(typeof children);
+function ContextProvider({ children }: ContextProviderProps) {
   const colorHash = useMemo(() => ({
     bug: {
       bg_color: '#3b9950',
