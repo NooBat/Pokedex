@@ -11,7 +11,35 @@ import Footer from './components/Footer';
 
 import pokemonService from './services/pokemons';
 
-const App = () => {
+interface Move {
+  id: number,
+  name: string,
+  level: number,
+}
+
+interface Stats {
+  hp: number,
+  attack: number,
+  defense: number,
+  special_attack: number,
+  special_defense: number,
+  speed: number,
+}
+
+interface Pokemon {
+  id: number,
+  name: string,
+  form: string,
+  owned: boolean,
+  types: string[],
+  baseExp: number,
+  height: string,
+  weight: string,
+  moves: Move[],
+  stats: Stats,
+}
+
+function App() {
   const [ownedPokemons, setOwnedPokemons] = useState<Pokemon[]>([]);
   const match = useMatch('/pokemons/:id');
 
@@ -37,10 +65,10 @@ const App = () => {
       setOwnedPokemons(
         newPokemonsArray.splice(
           ownedPokemons.findIndex(
-            (pokemon: Pokemon) => pokemon.id === newPokemon.id
+            (pokemon: Pokemon) => pokemon.id === newPokemon.id,
           ),
-          1
-        )
+          1,
+        ),
       );
     }
   };
@@ -49,16 +77,16 @@ const App = () => {
 
   return (
     <ContextProvider>
-      <div className='h-screen w-screen'>
+      <div className="h-screen w-screen">
         <NavBar />
         <main>
           <Routes>
             <Route
-              path='/'
+              path="/"
               element={<MainPage ownedPokemon={ownedPokemons} />}
             />
             <Route
-              path='/pokemons/:id'
+              path="/pokemons/:id"
               element={
                 <PokemonPage id={id} handleClickOwned={handleClickOwned} />
               }
@@ -71,6 +99,6 @@ const App = () => {
       </div>
     </ContextProvider>
   );
-};
+}
 
 export default App;
